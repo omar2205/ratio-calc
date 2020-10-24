@@ -177,6 +177,7 @@
 	/* 	 */
 	.layout-grid {
 		display: grid;
+    justify-content: center;
 		grid-template-columns: repeat(auto-fit, 130px);
 		grid-template-rows: 100px 1.4fr 1fr;
 		gap: 1px 1px;
