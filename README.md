@@ -7,3 +7,5 @@ Players ratio calculator check it at https://fnf.oskr.nl
 `npm i`
 and `npm dev` or `npm build`
 
+Made with svelte
+![](public/z.png)
