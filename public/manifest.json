@@ -1,0 +1,13 @@
+{
+  "name": "FNF Player Ratio Calculator",
+  "short_name": "FNF RCAL",
+  "description": "FNF Ratio Calculator",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ]
+}
