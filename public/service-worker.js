@@ -1,4 +1,4 @@
-const PRECACHE = 'precache-v1'
+const PRECACHE = 'precache-v2'
 const RUNTIME = 'runtime'
 
 const PRECACHE_URLS = [
@@ -7,8 +7,8 @@ const PRECACHE_URLS = [
   'global.css',
   '/build/bundle.css',
   '/build/bundle.js',
-  '/fonts/font.css',
   'https://unpkg.com/@material/textfield@7.0.0/dist/mdc.textfield.min.css',
+  '/fonts/font.css',
   '/fonts/F37Moon-ExtraBold.otf',
   '/fonts/F37Moon-Thin.otf'
 ]
