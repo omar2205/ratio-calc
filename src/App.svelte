@@ -112,7 +112,7 @@
         label="BLUE"
         type="number"
         min="0"
-        helper="Total number of BLUEFOR"
+        helper="Ratio/percentage of BLUEFOR"
         on:input={updateValues}
       />
 		</div>
@@ -124,7 +124,7 @@
         label="OPFOR"
         type="number"
         min="0"
-        helper="Total number of OPFOR"
+        helper="Ratio/percentage of OPFOR"
         on:input={updateValues}
       />
 		</div>
@@ -136,12 +136,12 @@
         label="INDFOR"
         type="number"
         min="0"
-        helper="Total number of Independent"
+        helper="Ratio/percentage of Independent"
         on:input={updateValues}
       />
 		</div>
 	</div>
-	<p>For example: 20 Players, We enter the ratio/percentage that the mission want. Result: 15 Blue, and 5 Red</p>
+	<p class="note">Enter the ratio/percentage the mission wants. For example: 20 Players, we enter 3 Blue, 1 Red. Result: 15 Blue, and 5 Red</p>
   <div class="ratio-bar">
 		<div class="blue" style="width:{blueBar+'%'}"></div>
 		<div class="green" style="width:{indBar+'%'}"></div>
@@ -198,6 +198,10 @@
 	.layout-grid__cell {
 		width: 120px;
 	}
+
+  p.note {
+    font-size: 14px;
+  }
 
 	/* 	 */
 	.ratio-bar {
