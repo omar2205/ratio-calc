@@ -1,17 +1,15 @@
 <svelte:head>
-	<link href="https://unpkg.com/@material/textfield@7.0.0/dist/mdc.textfield.min.css" rel="stylesheet">
+  <script type="module">
+		import 'https://unpkg.com/@material/mwc-textfield@0.25.3/mwc-textfield.js?module'
+	</script>
 </svelte:head>
 
 <script>
-	import {MDCTextField} from '@material/textfield'
 	
 	let blueBar = 0
 	let indBar = 0
 	let redBar = 0
 
-	function mdcTextfield (node) {
-		let textField = new MDCTextField(node)
-	}
 	let totalPlayers = null
 	let bluePlayers = null
 	let indPlayers = null
@@ -68,74 +66,52 @@
 	<div class="layout-grid"><!-- g  -->
 		<!-- 		<div class="layout-grid__inner"> -->
 		<div class="layout-grid__cell layout-grid__cell--span-2">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={totalPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalPlayers">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalPlayers" class="mdc-floating-label">Players</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="totalPlayerHelp" aria-hidden="true">Total number of players</div>
-			</div>
+      <mwc-textfield
+        outlined
+        label="Players"
+        helper="Total number of players"
+        on:change={e => totalPlayers = e.target.value}
+        on:change={calcRatio}
+      />
 		</div>
 		<!-- Blue -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={bluePlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalBLUE">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">BLUE</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="bluePlayerHelper" aria-hidden="true">Total number of BLUEFOR</div>
-			</div>
+      <mwc-textfield
+        outlined
+        label="BLUE"
+        helper="Total number of BLUEFOR"
+        on:change={e => bluePlayers = e.target.value}
+        on:change={calcRatio}
+      />
 		</div>
 		<!-- OPFOR -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={redPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalOPFOR">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">OPFOR</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="opforPlayerHelper" aria-hidden="true">Total number of OPFOR</div>
-			</div>
+      <mwc-textfield
+        outlined
+        label="OPFOR"
+        helper="Total number of OPFOR"
+        on:change={e => redPlayers = e.target.value}
+        on:change={calcRatio}
+      />
 		</div>
 		<!-- INDFOR -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={indPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalRED">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">INDFOR</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="indPlayerHelper" aria-hidden="true">Total number of Independent</div>
-			</div>
+      <mwc-textfield
+        outlined
+        label="INDFOR"
+        helper="Total number of Independent"
+        on:change={e => indPlayers = e.target.value}
+        on:change={calcRatio}
+      />
 		</div>
 	</div>
-	<div class="ratio-bar">
+	
+  <div class="ratio-bar">
 		<div class="blue" style="width:{blueBar+'%'}"></div>
 		<div class="green" style="width:{indBar+'%'}"></div>
 		<div class="red" style="width:{redBar+'%'}"></div>
 	</div>
+
 	<dic class="playersCount">
 		<h3>
 			BLUEFOR: {blueResult} <br /> INDFOR: {indResult} <br /> OPFOR: {redResult}
@@ -143,8 +119,9 @@
 	</dic>
 </div>
 <div class="footer">
-	&copy; 2020 1stLt Oscar [TF-G]
+	&copy; 2022 oskr.nl
 </div>
+
 <style>
 	:global(body) {
 		margin: 0;
