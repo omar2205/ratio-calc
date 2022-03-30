@@ -9,7 +9,9 @@ const PRECACHE_URLS = [
   '/build/bundle.js',
   'https://unpkg.com/@material/mwc-textfield@0.25.3/mwc-textfield.js?module',
   'https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap',
-  'https://fonts.gstatic.com/s/archivo/*'
+  'https://fonts.gstatic.com/s/archivo/v9/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2',
+  'https://fonts.gstatic.com/s/archivo/v9/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2',
+  'https://fonts.gstatic.com/s/archivo/v9/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2'
 ]
 
 self.addEventListener('install', e => {
