@@ -1,17 +1,19 @@
 <svelte:head>
-	<link href="https://unpkg.com/@material/textfield@7.0.0/dist/mdc.textfield.min.css" rel="stylesheet">
+  <script type="module">
+		import 'https://unpkg.com/@material/mwc-textfield@0.25.3/mwc-textfield.js?module'
+	</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap" rel="stylesheet">
 </svelte:head>
 
 <script>
-	import {MDCTextField} from '@material/textfield'
 	
 	let blueBar = 0
 	let indBar = 0
 	let redBar = 0
 
-	function mdcTextfield (node) {
-		let textField = new MDCTextField(node)
-	}
 	let totalPlayers = null
 	let bluePlayers = null
 	let indPlayers = null
@@ -28,6 +30,30 @@
 			return false
 		return true;
 	}
+
+  // get the data-id from the event
+  function updateValues({target}) {
+    const {value: value_raw, dataset: { id }} = target
+    const value = parseInt(value_raw)
+
+    if (typeof id === 'string') {
+      switch (id) {
+        case 'total-players':
+          totalPlayers = value ? value : 0
+          break;
+        case 'blue-players':
+          bluePlayers = value ? value : 0
+          break;
+        case 'ind-players':
+          indPlayers = value ? value : 0
+          break;
+        case 'red-players':
+          redPlayers = value ? value : 0
+          break;
+      }
+    }
+    calcRatio()
+  }
 
 	function calcRatio() {
 		let totalRatio = bluePlayers + indPlayers + redPlayers
@@ -68,74 +94,60 @@
 	<div class="layout-grid"><!-- g  -->
 		<!-- 		<div class="layout-grid__inner"> -->
 		<div class="layout-grid__cell layout-grid__cell--span-2">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={totalPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalPlayers">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalPlayers" class="mdc-floating-label">Players</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="totalPlayerHelp" aria-hidden="true">Total number of players</div>
-			</div>
+      <mwc-textfield
+        data-id="total-players"
+        outlined
+        label="Players"
+        type="number"
+        min="0"
+        helper="Total number of players"
+        on:input={updateValues}
+      />
 		</div>
 		<!-- Blue -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={bluePlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalBLUE">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">BLUE</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="bluePlayerHelper" aria-hidden="true">Total number of BLUEFOR</div>
-			</div>
+      <mwc-textfield
+        data-id="blue-players"
+        outlined
+        label="BLUE"
+        type="number"
+        min="0"
+        helper="Total number of BLUEFOR"
+        on:input={updateValues}
+      />
 		</div>
 		<!-- OPFOR -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={redPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalOPFOR">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">OPFOR</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="opforPlayerHelper" aria-hidden="true">Total number of OPFOR</div>
-			</div>
+      <mwc-textfield
+        data-id="red-players"
+        outlined
+        label="OPFOR"
+        type="number"
+        min="0"
+        helper="Total number of OPFOR"
+        on:input={updateValues}
+      />
 		</div>
 		<!-- INDFOR -->
 		<div class="layout-grid__cell">
-			<div class="mdc-text-field mdc-text-field--outlined" use:mdcTextfield>
-				<input bind:value={indPlayers} on:change={calcRatio} class="mdc-text-field__input" type="number" id="totalRED">
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-						<label for="totalBLUE" class="mdc-floating-label">INDFOR</label>
-					</div>
-					<div class="mdc-notched-outline__trailing"></div>
-				</div>
-			</div>
-			<div class="mdc-text-field-helper-line">
-				<div class="mdc-text-field-helper-text" id="indPlayerHelper" aria-hidden="true">Total number of Independent</div>
-			</div>
+      <mwc-textfield
+        data-id="ind-players"
+        outlined
+        label="INDFOR"
+        type="number"
+        min="0"
+        helper="Total number of Independent"
+        on:input={updateValues}
+      />
 		</div>
 	</div>
-	<div class="ratio-bar">
+	<p>For example: 20 Players, the mission wants a ratio of 3:1, so: 15 Blue, and 5 Red</p>
+  <div class="ratio-bar">
 		<div class="blue" style="width:{blueBar+'%'}"></div>
 		<div class="green" style="width:{indBar+'%'}"></div>
 		<div class="red" style="width:{redBar+'%'}"></div>
 	</div>
+
 	<dic class="playersCount">
 		<h3>
 			BLUEFOR: {blueResult} <br /> INDFOR: {indResult} <br /> OPFOR: {redResult}
@@ -143,13 +155,14 @@
 	</dic>
 </div>
 <div class="footer">
-	&copy; 2020 1stLt Oscar [TF-G]
+	&copy; 2022 oskr.nl //
+  <a href="https://fridaynightfight.org">visit FNF site</a>
 </div>
+
 <style>
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		font-family: 'f37 moon',  'Helvetica Now Display', 'Helvetica', sans-serif;
 		background: #f4f4f4;
 	}
 	.header {
@@ -162,8 +175,8 @@
 		margin: 0;
 	}
 	.header h1 {
-		font-size: 50px;
-		font-weight: 200;
+		font-size: 1.2rem;
+		font-weight: 400;
 	}
 	.card {
 		background: #fff;
@@ -174,12 +187,12 @@
 		border-radius: 10px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	}
-	/* 	 */
+
 	.layout-grid {
 		display: grid;
     justify-content: center;
 		grid-template-columns: repeat(auto-fit, 130px);
-		grid-template-rows: 100px 1.4fr 1fr;
+		grid-template-rows: 100px 100px;
 		gap: 1px 1px;
 	}
 	.layout-grid__cell {
@@ -206,6 +219,6 @@
 	.footer {
 		padding: 2rem;
 		text-align: center;
-		font-size: 12px;
+		font-size: 14px;
 	}
 </style>

@@ -1,4 +1,4 @@
-const PRECACHE = 'precache-v2'
+const PRECACHE = 'precache-v3'
 const RUNTIME = 'runtime'
 
 const PRECACHE_URLS = [
@@ -7,10 +7,9 @@ const PRECACHE_URLS = [
   'global.css',
   '/build/bundle.css',
   '/build/bundle.js',
-  'https://unpkg.com/@material/textfield@7.0.0/dist/mdc.textfield.min.css',
-  '/fonts/font.css',
-  '/fonts/F37Moon-ExtraBold.otf',
-  '/fonts/F37Moon-Thin.otf'
+  'https://unpkg.com/@material/mwc-textfield@0.25.3/mwc-textfield.js?module',
+  'https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap',
+  'https://fonts.gstatic.com/s/archivo/v9/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2',
 ]
 
 self.addEventListener('install', e => {
