@@ -100,7 +100,6 @@
         label="Players"
         type="number"
         min="0"
-        helper="Total number of players"
         on:input={updateValues}
       />
 		</div>
@@ -112,7 +111,6 @@
         label="BLUE"
         type="number"
         min="0"
-        helper="Ratio/percentage of BLUEFOR"
         on:input={updateValues}
       />
 		</div>
@@ -124,7 +122,6 @@
         label="OPFOR"
         type="number"
         min="0"
-        helper="Ratio/percentage of OPFOR"
         on:input={updateValues}
       />
 		</div>
@@ -136,7 +133,6 @@
         label="INDFOR"
         type="number"
         min="0"
-        helper="Ratio/percentage of Independent"
         on:input={updateValues}
       />
 		</div>
@@ -192,7 +188,7 @@
 		display: grid;
     justify-content: center;
 		grid-template-columns: repeat(auto-fit, 130px);
-		grid-template-rows: 100px 100px;
+		grid-template-rows: 72px;
 		gap: 1px 1px;
 	}
 	.layout-grid__cell {
