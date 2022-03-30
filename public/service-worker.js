@@ -31,3 +31,14 @@ registerRoute(
   ({url}) => url.pathname.startsWith('/icons'),
   new CacheFirst()
 )
+
+self.addEventListener('push', e => {
+  const message = e.data.json()
+  self.registration.showNotification(
+    message.title, 
+    { 
+      body: message.text,
+      image: '/icons/icon-192x192.png'
+    }
+  )
+})
