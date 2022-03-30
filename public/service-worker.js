@@ -1,56 +1,33 @@
-const PRECACHE = 'precache-v3'
-const RUNTIME = 'runtime'
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
+)
 
-const PRECACHE_URLS = [
-  'index.html',
-  './',
-  'global.css',
-  '/build/bundle.css',
-  '/build/bundle.js',
-  'https://unpkg.com/@material/mwc-textfield@0.25.3/mwc-textfield.js?module',
-  'https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap',
-  'https://fonts.gstatic.com/s/archivo/v9/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2',
-]
+workbox.loadModule('workbox-strategies')
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS))
-      .then(self.skipWaiting())
-  )
-})
+const {registerRoute} = workbox.routing
+const {StaleWhileRevalidate, CacheFirst} = workbox.strategies
 
-self.addEventListener('activate', e => {
-  const currentCaches = [PRECACHE, RUNTIME]
-  e.waitUntil(
-    caches.keys().then(cacheNames => {
-      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName))
-    }).then(cachesToDelete => {
-      return Promise.all(cachesToDelete.map(cacheToDelete => {
-        return caches.delete(cacheToDelete)
-      }))
-    }).then(() => self.clients.claim())
-  )
-})
+registerRoute(
+  new RegExp('https://unpkg\\.com/*'),
+  new StaleWhileRevalidate()
+)
 
-self.addEventListener('fetch', e => {
-  // Skip cross-origin requests, like those for Google Analytics.
-  if (e.request.url.startsWith(self.location.origin)) {
-    e.respondWith(
-      caches.match(e.request).then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse
-        }
+registerRoute(
+  new RegExp('https://fonts\\.gstatic\\.com/*'),
+  new StaleWhileRevalidate()
+)
 
-        return caches.open(RUNTIME).then(cache => {
-          return fetch(e.request).then(response => {
-            // Put a copy of the response in the runtime cache.
-            return cache.put(e.request, response.clone()).then(() => {
-              return response
-            })
-          })
-        })
-      })
-    )
-  }
-})
+registerRoute(
+  new RegExp('/|/index.html|/global.css'),
+  new StaleWhileRevalidate()
+)
+
+registerRoute(
+  ({url}) => url.pathname.startsWith('/build'),
+  new StaleWhileRevalidate()
+)
+
+registerRoute(
+  ({url}) => url.pathname.startsWith('/icons'),
+  new CacheFirst()
+)
