@@ -141,7 +141,7 @@
       />
 		</div>
 	</div>
-	<p>For example: 20 Players, the mission wants a ratio of 3:1, so: 15 Blue, and 5 Red</p>
+	<p>For example: 20 Players, We enter the ratio/percentage that the mission want. Result: 15 Blue, and 5 Red</p>
   <div class="ratio-bar">
 		<div class="blue" style="width:{blueBar+'%'}"></div>
 		<div class="green" style="width:{indBar+'%'}"></div>
